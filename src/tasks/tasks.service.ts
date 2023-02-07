@@ -57,7 +57,7 @@ export class TasksService {
 
     deleteTask(id: string): void {
         const taskToDelete = this.getTaskById(id);
-        this.tasks = this.tasks.filter(task => task.id !== taskToDelete.id)
+        this.tasks = this.tasks.filter(task => task.id !== taskToDelete.id);
     }
 
     updateTaskStatus(id: string, status: TaskStatus): Task {
