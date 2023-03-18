@@ -44,10 +44,6 @@ export class TasksService {
     const { title, description } = createTaskDto;
     const task = new Task(title, description, TaskStatus.OPEN);
 
-    //   task.title = title;
-    //   task.description = description;
-    //   task.status = TaskStatus.IN_PROGRESS;
-
     await this.taskRepository.save(task);
 
     return task;
@@ -73,9 +69,4 @@ export class TasksService {
     return taskToUpdate;
   }
 
-  // updateTaskStatus(id: string, status: TaskStatus): Task {
-  //     const task = this.getTaskById(id);
-  //     task.status = status;
-  //     return task;
-  // }
 }

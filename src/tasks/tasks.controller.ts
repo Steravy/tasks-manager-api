@@ -11,6 +11,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { TaskStatusValidationPipe } from './custom_pipes/task_status_validation_pipes';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksByFilterDto } from './dto/get-tasks-filter-dto';
@@ -18,6 +19,7 @@ import { TaskStatus } from './task-status.enum';
 import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
 
+@ApiTags("tasks")
 @Controller('tasks')
 export class TasksController {
   constructor(private tasksService: TasksService) {}
