@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 
 @Entity("user")
+@Unique(['userName'])
 export class User {
 
     @PrimaryGeneratedColumn()

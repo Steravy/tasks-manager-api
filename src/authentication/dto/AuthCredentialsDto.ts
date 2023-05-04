@@ -17,6 +17,7 @@ export class AuthCredentialsDto {
     @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
         message: 'password is too weak'})
     private password: string;
+    
 
     getUserName(): string {
         return this.userName;
