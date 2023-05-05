@@ -1,4 +1,4 @@
-import {Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { TaskStatus } from "./task-status.enum";
 
 @Entity('task')
@@ -14,6 +14,12 @@ export class Task {
 
     @Column("varchar", { name: "status", length: 45 })
     status: TaskStatus;
+
+    @CreateDateColumn()
+    createddate: Date;
+
+    @DeleteDateColumn()
+    deletedDate: Date;
 
     constructor (title: string, description: string, status: TaskStatus) {
         this.title = title;

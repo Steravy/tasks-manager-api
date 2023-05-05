@@ -15,7 +15,7 @@ export class AuthCredentialsDto {
     @MinLength(4, {message: 'password should have at least 4 character!'})
     @MaxLength(20, {message: 'password should not have more then 20 character!'})
     @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-        message: 'password is too weak'})
+        message: 'Password is too weak. Try to include uppercase and lowercase letters, special characters and numbers.'})
     private password: string;
     
 
