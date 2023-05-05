@@ -17,7 +17,7 @@ export class AuthenticationController {
     }
 
     @Post('/signin')
-    signIp(@Body() authCredentialsDto: AuthCredentialsDto){
+    signIp(@Body() authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
         return this.authenticationService.signIn(authCredentialsDto);
     }
 
