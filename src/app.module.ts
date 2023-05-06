@@ -13,6 +13,7 @@ import { AuthenticationController } from './authentication/authentication.contro
 import { TasksController } from './tasks/tasks.controller';
 import { AuthenticationService } from './authentication/authentication.service';
 import { TasksService } from './tasks/tasks.service';
+import { JwtStrategy } from './authentication/JwtStrategy';
 
 
 @Module({
@@ -44,7 +45,8 @@ import { TasksService } from './tasks/tasks.service';
   ],
 
   controllers: [AuthenticationController, TasksController],
-  providers: [AuthenticationService, TasksService],
+  providers: [AuthenticationService, TasksService, JwtStrategy],
+  exports: [JwtStrategy, PassportModule]
 
 })
 export class AppModule { }
