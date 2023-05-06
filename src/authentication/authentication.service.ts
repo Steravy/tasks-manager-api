@@ -22,7 +22,7 @@ export class AuthenticationService {
         return await bcrypt.hash(password, salt);
     }
 
-    private async findUserByUserName(userName: string): Promise<User> {
+    public async findUserByUserName(userName: string): Promise<User> {
 
         const foundUser = await this.userRepository.findOne(<any>{ where: { userName } });
 
