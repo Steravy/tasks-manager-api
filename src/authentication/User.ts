@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { Task } from "src/tasks/task.entity";
 
 
 @Entity("user")
@@ -7,7 +8,7 @@ import * as bcrypt from 'bcrypt';
 export class User {
 
     @PrimaryGeneratedColumn()
-    private id:number;
+    readonly id:number;
 
     @Column("varchar", { name: "user_name", length: 60 })
     private userName: string;
@@ -17,6 +18,9 @@ export class User {
 
     @Column("varchar", { name: "salt"})
     private salt: string;
+
+    @OneToMany(() => Task, (task) => task["user"], {eager: true})
+    tasks: Task[];
 
     @CreateDateColumn()
     private createddate: Date;

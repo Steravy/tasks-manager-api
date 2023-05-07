@@ -24,11 +24,11 @@ export class AuthenticationController {
         return this.authenticationService.signIn(authCredentialsDto);
     }
 
-    @Post('/test')
-    @UseGuards(AuthGuard())
-    test(@GetUser() user: User) {
+    // @Post('/test')
+    // @UseGuards(AuthGuard())
+    // test(@GetUser() user: User) {
         
-        console.log(user);
-    }
+    //     console.log(user);
+    // }
 
 }
