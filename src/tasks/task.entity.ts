@@ -5,35 +5,45 @@ import { User } from "src/authentication/User";
 @Entity('task')
 export class Task {
     @PrimaryGeneratedColumn()
-    id: number;
+    readonly id: number;
 
     @Column("varchar", { name: "title", length: 45 })
-    title: string;
+    private title: string;
 
     @Column("varchar", { name: "description", length: 500 })
-    description: string;
+    private description: string;
 
     @Column("varchar", { name: "status", length: 45 })
-    status: TaskStatus;
+    private status: TaskStatus;
 
     @ManyToOne(() => User, (user) => user.tasks, {eager: false})
     user: User;
 
     @Column()
-    userId: number;
+    readonly userId: number;
 
     @CreateDateColumn()
-    createddate: Date;
+    readonly createddate: Date;
 
     @DeleteDateColumn()
-    deletedDate: Date;
+    readonly deletedDate: Date;
 
     constructor (title: string, description: string, status: TaskStatus, user: User) {
+
         this.title = title;
         this.description = description;
         this.status = status;
         this.user = user;
 
+    }
+
+    update(title: string, description: string): void {
+        this.title = title;
+        this.description = description;
+    }
+
+    setStatus(status: TaskStatus): void {
+        this.status = status;
     }
 
 }

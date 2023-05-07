@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './task.entity';
 import { Repository } from 'typeorm';
 import { User } from 'src/authentication/User';
+import { UpdateTaskDto } from './dto/UpdateTaskDto';
 
 @Injectable()
 export class TasksService {
@@ -56,6 +57,7 @@ export class TasksService {
   }
 
   async deleteTask(id: number): Promise<void> {
+
     const wasDeleted = await this.taskRepository.delete(id);
     console.log(wasDeleted);
     console.log('______________________');
@@ -67,12 +69,26 @@ export class TasksService {
     }
   }
 
-  // async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
-  //   const taskToUpdate = await this.getTaskById(id);
-  //   taskToUpdate.status = status;
-  //   await this.taskRepository.save(taskToUpdate);
+  async updateTask(id: number, user: User, updateTaskDto: UpdateTaskDto): Promise<Task> {
 
-  //   return taskToUpdate;
-  // }
+    const taskToUpdate = await this.getTaskById(id, user);
+
+    taskToUpdate.update(updateTaskDto.title, updateTaskDto.description);
+
+    await this.taskRepository.save(taskToUpdate);
+
+    return taskToUpdate;
+
+  }
+
+  async updateTaskStatus(id: number, status: TaskStatus, user: User): Promise<Task> {
+
+    const taskToUpdateStatus = await this.getTaskById(id, user);
+    taskToUpdateStatus.setStatus(status);
+    await this.taskRepository.save(taskToUpdateStatus);
+
+    return taskToUpdateStatus;
+
+  }
 
 }

@@ -22,6 +22,7 @@ import { TasksService } from './tasks.service';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/authentication/GetUserDecorator';
 import { User } from 'src/authentication/User';
+import { UpdateTaskDto } from './dto/UpdateTaskDto';
 
 @ApiTags("tasks")
 @Controller('tasks')
@@ -52,11 +53,19 @@ export class TasksController {
     return this.tasksService.deleteTask(id);
   }
 
-  // @Patch(':id/status')
-  // updateTaskStatus(
-  //   @Param('id', ParseIntPipe) id: number,
-  //   @Body('status', TaskStatusValidationPipe) status: TaskStatus,
-  // ): Promise<Task> {
-  //   return this.tasksService.updateTaskStatus(id, status);
-  // }
+  @Patch(':id')
+  updateTask(@GetUser() user: User, @Param('id', ParseIntPipe) id: number, @Body() updateTaskDto: UpdateTaskDto): Promise<Task> {
+
+    return this.tasksService.updateTask(id, user, updateTaskDto);
+
+  }
+
+  @Patch(':id/status')
+  updateTaskStatus(
+    @GetUser() user: User,
+    @Param('id', ParseIntPipe) id: number,
+    @Body('status', TaskStatusValidationPipe) status: TaskStatus,
+  ): Promise<Task> {
+    return this.tasksService.updateTaskStatus(id, status, user);
+  }
 }
