@@ -56,19 +56,6 @@ export class TasksService {
     return task;
   }
 
-  async deleteTask(id: number): Promise<void> {
-
-    const wasDeleted = await this.taskRepository.delete(id);
-    console.log(wasDeleted);
-    console.log('______________________');
-    console.log(wasDeleted.affected);
-
-
-    if (wasDeleted.affected === 0) {
-      throw new NotFoundException(`Task with ID: ${id} does\`t exists`);
-    }
-  }
-
   async updateTask(id: number, user: User, updateTaskDto: UpdateTaskDto): Promise<Task> {
 
     const taskToUpdate = await this.getTaskById(id, user);
@@ -89,6 +76,19 @@ export class TasksService {
 
     return taskToUpdateStatus;
 
+  }
+
+  async deleteTask(id: number, user: User): Promise<void> {
+
+    const wasDeleted = await this.taskRepository.softDelete({ id, userId: user.id });
+    console.log(wasDeleted);
+    console.log('______________________');
+    console.log(wasDeleted.affected);
+
+
+    if (wasDeleted.affected === 0) {
+      throw new NotFoundException(`Task with ID: ${id} does\`t exists`);
+    }
   }
 
 }

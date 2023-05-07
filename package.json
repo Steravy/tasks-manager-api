@@ -1,8 +1,8 @@
 {
   "name": "task-management",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "This is a task management Rest API",
+  "author": "Stefan Vitoria",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
